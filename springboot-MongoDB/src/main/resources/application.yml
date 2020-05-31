@@ -1,2 +1,5 @@
 server:
   port: 8091
+logging:
+  file:
+    name: application.log
