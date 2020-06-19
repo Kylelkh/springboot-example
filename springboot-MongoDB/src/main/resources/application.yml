@@ -3,3 +3,7 @@ server:
 logging:
   file:
     name: application.log
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test # please change for your mongodb config
