@@ -6,4 +6,4 @@ logging:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/test # please change for your mongodb config
+      uri: mongodb://localhost:27017/springboot_test_db # please change for your mongodb config
