@@ -32,4 +32,4 @@ build/
 /.mvn/
 
 ### Log File ###
-*.log
+*.log*
