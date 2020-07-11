@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
+        // TODO： get user detail from db rather than memory
         UserDetails user =
                 User.withDefaultPasswordEncoder()
                         .username("user")
