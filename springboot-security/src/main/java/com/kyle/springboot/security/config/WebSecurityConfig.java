@@ -6,47 +6,51 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
-    }
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests()
+        .antMatchers("/", "/home")
+        .permitAll()
+        .anyRequest()
+        .authenticated()
+        .and()
+        .formLogin()
+        .loginPage("/login")
+        .permitAll()
+        .and()
+        .logout()
+        .permitAll();
+  }
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        // TODO： get user detail from db rather than memory
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
-                        .roles("USER")
-                        .build();
-        UserDetails admin =
-                User.withDefaultPasswordEncoder()
-                        .username("admin")
-                        .password("password")
-                        .roles("ADMIN")
-                        .build();
+  @Bean
+  public BCryptPasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-        return new InMemoryUserDetailsManager(user, admin);
-    }
+//  @Bean
+//  @Override
+//  public UserDetailsService userDetailsService() {
+//    // TODO： get user detail from db rather than memory
+//    UserDetails user =
+//        User.withDefaultPasswordEncoder()
+//            .username("user")
+//            .password("$2a$10$fozesoRW5lQytW8Boy0zAeX7Yi.J4OMLpysJA7G5zSrIc.EzTGKYO")
+//            //                        .password(bCryptPasswordEncoder.encode("password"))
+//            .roles("USER")
+//            .build();
+//    UserDetails admin =
+//        User.withDefaultPasswordEncoder()
+//            .username("admin")
+//            .password("password")
+//            .roles("ADMIN")
+//            .build();
+//
+//    return new InMemoryUserDetailsManager(user, admin);
+//  }
 }

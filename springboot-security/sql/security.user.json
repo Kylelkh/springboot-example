@@ -1,0 +1,10 @@
+{
+    "username" : "user", 
+    "password" : "$2a$10$fozesoRW5lQytW8Boy0zAeX7Yi.J4OMLpysJA7G5zSrIc.EzTGKYO", 
+    "role" : "USER"
+}
+{
+    "username" : "admin", 
+    "password" : "$2a$10$fozesoRW5lQytW8Boy0zAeX7Yi.J4OMLpysJA7G5zSrIc.EzTGKYO", 
+    "role" : "ADMIN"
+}
