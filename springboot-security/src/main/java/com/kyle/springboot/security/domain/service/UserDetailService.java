@@ -16,10 +16,14 @@ public class UserDetailService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     com.kyle.springboot.security.domain.entity.User user = userRepository.findByUsername(username);
-    if (user != null) {
-      UserDetails userDetails = User.withUsername(user.getUsername()).password(user.getPassword()).roles(user.getRole()).build();
-      return userDetails;
+    if (user == null) {
+      throw new UsernameNotFoundException("User not found...");
     }
-    return null;
+    UserDetails userDetails =
+        User.withUsername(user.getUsername())
+            .password(user.getPassword())
+            .roles(user.getRole())
+            .build();
+    return userDetails;
   }
 }
