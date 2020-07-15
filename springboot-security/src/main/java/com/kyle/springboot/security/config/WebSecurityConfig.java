@@ -15,13 +15,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-        .antMatchers("/", "/home")
+        .antMatchers("/", "/home", "/security/login")
         .permitAll()
         .anyRequest()
         .authenticated()
-        .and()
+        .and().cors().disable()
         .formLogin()
-        .loginPage("/login")
+        .loginProcessingUrl("/security/login")
+        //        .loginPage("/login")
         .permitAll()
         .and()
         .logout()
@@ -33,24 +34,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return new BCryptPasswordEncoder();
   }
 
-//  @Bean
-//  @Override
-//  public UserDetailsService userDetailsService() {
-//    // TODO： get user detail from db rather than memory
-//    UserDetails user =
-//        User.withDefaultPasswordEncoder()
-//            .username("user")
-//            .password("$2a$10$fozesoRW5lQytW8Boy0zAeX7Yi.J4OMLpysJA7G5zSrIc.EzTGKYO")
-//            //                        .password(bCryptPasswordEncoder.encode("password"))
-//            .roles("USER")
-//            .build();
-//    UserDetails admin =
-//        User.withDefaultPasswordEncoder()
-//            .username("admin")
-//            .password("password")
-//            .roles("ADMIN")
-//            .build();
-//
-//    return new InMemoryUserDetailsManager(user, admin);
-//  }
+  //  @Bean
+  //  @Override
+  //  public UserDetailsService userDetailsService() {
+  //    // TODO： get user detail from db rather than memory
+  //    UserDetails user =
+  //        User.withDefaultPasswordEncoder()
+  //            .username("user")
+  //            .password("$2a$10$fozesoRW5lQytW8Boy0zAeX7Yi.J4OMLpysJA7G5zSrIc.EzTGKYO")
+  //            //                        .password(bCryptPasswordEncoder.encode("password"))
+  //            .roles("USER")
+  //            .build();
+  //    UserDetails admin =
+  //        User.withDefaultPasswordEncoder()
+  //            .username("admin")
+  //            .password("password")
+  //            .roles("ADMIN")
+  //            .build();
+  //
+  //    return new InMemoryUserDetailsManager(user, admin);
+  //  }
 }
