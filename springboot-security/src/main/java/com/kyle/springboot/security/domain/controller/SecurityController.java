@@ -1,14 +1,13 @@
 package com.kyle.springboot.security.domain.controller;
 
+import com.kyle.springboot.security.domain.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/security")
@@ -37,11 +36,24 @@ public class SecurityController {
     Object principal = authentication.getPrincipal();
     String username = null;
     if (principal instanceof UserDetails) {
-      username =
-          ((UserDetails) principal).getUsername();
+      username = ((UserDetails) principal).getUsername();
     } else {
       username = principal.toString();
     }
     return username;
+  }
+
+  @GetMapping("/login")
+  public ResponseEntity login(@RequestParam String username, @RequestParam String password) {
+
+    log.info("login...", username);
+    return ResponseEntity.ok("ok");
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity login(@RequestBody UserDto userDto) {
+
+    log.info("login..." + userDto);
+    return ResponseEntity.ok("ok");
   }
 }
