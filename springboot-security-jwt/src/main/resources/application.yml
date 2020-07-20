@@ -13,3 +13,8 @@ level:
       data:
         mongodb:
           core: debug
+jwt:
+  tokenHeader: Authorization #JWT Header
+  secret: mySecret #JWT Secret
+  expiration: 604800 #JWT Expire(60*60*24)
+  tokenHead: Bearer  #JWT Payload
