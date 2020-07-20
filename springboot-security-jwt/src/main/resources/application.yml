@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      #      uri: mongodb://127.0.0.1:27017/shiro
+      host: localhost
+      port: 27017
+      database: security
+      username:
+      password:
+level:
+  org:
+    springframework:
+      data:
+        mongodb:
+          core: debug
