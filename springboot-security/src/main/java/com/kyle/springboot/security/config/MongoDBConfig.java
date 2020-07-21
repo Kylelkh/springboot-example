@@ -10,7 +10,7 @@ public class MongoDBConfig {
 
     @Bean
     public MongoClient mongoClient() {
-        return new MongoClient("localhost");
+        return new MongoClient("localhost:27018");
     }
 
     @Bean
