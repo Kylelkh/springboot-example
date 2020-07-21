@@ -1,10 +1,12 @@
 {
-    "username" : "user", 
-    "password" : "$2a$10$fozesoRW5lQytW8Boy0zAeX7Yi.J4OMLpysJA7G5zSrIc.EzTGKYO", 
+    "_id" : ObjectId("5f0a6ffec1de7716d433bd09"),
+    "username" : "user",
+    "password" : "$2a$10$iu/BDQZHBqXIZonRA1W9UukFmYKsZDCjKzM1gmdiJD8jk8jFyac.6",
     "role" : "USER"
 }
 {
-    "username" : "admin", 
-    "password" : "$2a$10$fozesoRW5lQytW8Boy0zAeX7Yi.J4OMLpysJA7G5zSrIc.EzTGKYO", 
+    "_id" : ObjectId("5f0a7017c1de7716d433bd0a"),
+    "username" : "admin",
+    "password" : "$2a$10$iu/BDQZHBqXIZonRA1W9UukFmYKsZDCjKzM1gmdiJD8jk8jFyac.6",
     "role" : "ADMIN"
 }
