@@ -23,6 +23,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+  private static final String[] staticResources = {
+    "/",
+    "/*.html",
+    "/favicon.ico",
+    "/**/*.html",
+    "/**/*.css",
+    "/**/*.js",
+    "/swagger-resources/**",
+    "/v2/api-docs/**"
+  };
+  private static final String userResources = "/users/**";
+  private static final String[] whiteList = {"/", "/login", "/register", "/actuator/**"};
+
   @Autowired private UserDetailService userDetailService;
   @Autowired private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
   @Autowired private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
@@ -33,20 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
-        .antMatchers(
-            HttpMethod.GET, // permit all static resources, like swagger ui
-            "/",
-            "/*.html",
-            "/favicon.ico",
-            "/**/*.html",
-            "/**/*.css",
-            "/**/*.js",
-            "/swagger-resources/**",
-            "/v2/api-docs/**")
+        .antMatchers(HttpMethod.GET, staticResources)
         .permitAll()
-        .antMatchers("/", "/login", "/register", "/actuator/**")
+        .antMatchers(whiteList)
         .permitAll()
-        .antMatchers("/users/**")
+        .antMatchers(userResources)
         .hasRole("USER")
         .antMatchers(HttpMethod.OPTIONS) // permit all options request for cross website
         .permitAll()
@@ -64,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     http.exceptionHandling()
         .accessDeniedHandler(restfulAccessDeniedHandler) // for api access
-        .authenticationEntryPoint(restAuthenticationEntryPoint); //for no login check
+        .authenticationEntryPoint(restAuthenticationEntryPoint); // for no login check
   }
 
   @Bean

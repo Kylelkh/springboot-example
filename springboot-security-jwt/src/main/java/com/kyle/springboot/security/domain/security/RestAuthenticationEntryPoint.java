@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.kyle.springboot.security.domain.CommonConst.UTF_8;
+
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
   @Override
@@ -18,7 +20,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
       HttpServletResponse response,
       AuthenticationException authException)
       throws IOException {
-    response.setCharacterEncoding("UTF-8");
+    response.setCharacterEncoding(UTF_8);
     response.setContentType("application/json");
     response
         .getWriter()
