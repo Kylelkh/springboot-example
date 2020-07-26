@@ -1,5 +1,6 @@
 package com.kyle.springboot.security.config;
 
+import com.kyle.springboot.security.domain.enums.UserRoleEnum;
 import com.kyle.springboot.security.domain.security.JwtAuthenticationTokenFilter;
 import com.kyle.springboot.security.domain.security.RestAuthenticationEntryPoint;
 import com.kyle.springboot.security.domain.security.RestfulAccessDeniedHandler;
@@ -51,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(whiteList)
         .permitAll()
         .antMatchers(userResources)
-        .hasRole("USER")
+        .hasRole(UserRoleEnum.USER.getRole())
         .antMatchers(HttpMethod.OPTIONS) // permit all options request for cross website
         .permitAll()
         .anyRequest()
@@ -79,7 +80,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   @Override
   public UserDetailsService userDetailsService() {
-    // 获取登录用户信息
     return username -> {
       UserDetails admin = userDetailService.loadUserByUsername(username);
       if (admin != null) {
