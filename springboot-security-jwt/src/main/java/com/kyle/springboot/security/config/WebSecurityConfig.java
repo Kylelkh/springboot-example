@@ -34,7 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     "/swagger-resources/**",
     "/v2/api-docs/**"
   };
-  private static final String userResources = "/users/**";
+  private static final String userResources = "/user/**";
+  private static final String adminResources = "/admin/**";
   private static final String[] whiteList = {"/", "/login", "/register", "/actuator/**"};
 
   @Autowired private UserDetailService userDetailService;
@@ -52,7 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(whiteList)
         .permitAll()
         .antMatchers(userResources)
-        .hasRole(UserRoleEnum.USER.getRole())
+        .hasAnyAuthority(UserRoleEnum.USER.getRole())
+        .antMatchers(adminResources)
+        .hasAnyAuthority(UserRoleEnum.ADMIN.getRole())
         .antMatchers(HttpMethod.OPTIONS) // permit all options request for cross website
         .permitAll()
         .anyRequest()
